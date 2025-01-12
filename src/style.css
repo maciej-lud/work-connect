@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-base font-medium;
+  }
+  button,
+  input,
+  select,
+  table {
+    @apply rounded-[12px] border border-solid border-[#e1e1e1];
+  }
+}
