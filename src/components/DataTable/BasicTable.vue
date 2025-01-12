@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr class="table__tr">
-        <td class="table__td table__td--center">
+        <td class="table__td text-center">
           <input class="table__checkbox" type="checkbox" />
         </td>
         <td class="table__td">Patryk Polak</td>
@@ -53,9 +53,6 @@
   &__td {
     font-size: 16px;
     color: #3d3d3d;
-    &--center {
-      text-align: center;
-    }
   }
   &__checkbox {
     width: 18px;

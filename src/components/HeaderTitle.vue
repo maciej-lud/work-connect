@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="header">
+  <div class="flex items-center">
     <h1 class="header__title">{{ title }}</h1>
     <span>ikona</span>
   </div>
@@ -13,8 +13,6 @@ defineProps<{
 
 <style lang="scss" scoped>
 .header {
-  display: flex;
-  align-items: center;
   &__title {
     font-size: 32px;
     font-weight: 600;

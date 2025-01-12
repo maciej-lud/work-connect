@@ -1,6 +1,6 @@
 <template>
-  <div class="pagination">
-    <div class="pagination__navigation">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center">
       <span class="pagination__text">Pozycji na stronie:</span>
       <select class="pagination__select">
         <option value="10">10</option>
@@ -10,7 +10,7 @@
         <option value="200">200</option>
       </select>
     </div>
-    <div class="pagination__navigation">
+    <div class="flex items-center">
       <span class="pagination__text">Strona 1 z 3</span>
       <div class="pagination__buttons">
         <button class="pagination__button"><</button>
@@ -25,8 +25,6 @@
 
 <style lang="scss" scoped>
 .pagination {
-  display: flex;
-  justify-content: space-between;
   &__text {
     color: #656565;
     letter-spacing: -1%;
@@ -35,10 +33,6 @@
     line-height: 2.2;
     padding: 10px 16px;
     margin-left: 12px;
-  }
-  &__navigation {
-    display: flex;
-    align-items: center;
   }
   &__buttons {
     display: flex;
