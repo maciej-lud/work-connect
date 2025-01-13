@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SelectInput from "@/components/SelectInput.vue";
 import SvgIcon from "@/components/SvgIcon.vue";
 </script>
 
@@ -6,13 +7,7 @@ import SvgIcon from "@/components/SvgIcon.vue";
   <div class="flex justify-between items-center">
     <div class="flex items-center">
       <span class="pagination__text">Pozycji na stronie:</span>
-      <select class="pagination__select">
-        <option value="10">10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-        <option value="200">200</option>
-      </select>
+      <SelectInput :options="['10', '25', '50', '100', '200']" class="ml-3" />
     </div>
     <div class="flex items-center">
       <span class="pagination__text">Strona 1 z 3</span>
@@ -36,11 +31,6 @@ import SvgIcon from "@/components/SvgIcon.vue";
   &__text {
     color: #656565;
     letter-spacing: -1%;
-  }
-  &__select {
-    line-height: 2.2;
-    padding: 10px 16px;
-    margin-left: 12px;
   }
   &__buttons {
     display: flex;

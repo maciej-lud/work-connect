@@ -25,7 +25,9 @@ import SvgIcon from "@/components/SvgIcon.vue";
         <td class="table__td">Username placeholder</td>
         <td class="table__td">Polska</td>
         <td class="table__td">22.09.2024, 9:22</td>
-        <td class="table__td"><SvgIcon name="dots" /></td>
+        <td class="table__td text-center">
+          <SvgIcon name="dots" class="inline-block" />
+        </td>
       </tr>
     </tbody>
   </table>
