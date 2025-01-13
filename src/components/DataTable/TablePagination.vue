@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import SvgIcon from "@/components/SvgIcon.vue";
+</script>
+
 <template>
   <div class="flex justify-between items-center">
     <div class="flex items-center">
@@ -13,11 +17,15 @@
     <div class="flex items-center">
       <span class="pagination__text">Strona 1 z 3</span>
       <div class="pagination__buttons">
-        <button class="pagination__button"><</button>
+        <button class="pagination__button">
+          <SvgIcon name="arrow-left" />
+        </button>
         <button class="pagination__button">1</button>
         <button class="pagination__button">2</button>
         <button class="pagination__button">3</button>
-        <button class="pagination__button">></button>
+        <button class="pagination__button">
+          <SvgIcon name="arrow-right" />
+        </button>
       </div>
     </div>
   </div>

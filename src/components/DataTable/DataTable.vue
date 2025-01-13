@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import TableFilters from "./TableFilters.vue";
-import BasicTable from "./BasicTable.vue";
-import TablePagination from "./TablePagination.vue";
+import TableFilters from "@/components/DataTable/TableFilters.vue";
+import BasicTable from "@/components/DataTable/BasicTable.vue";
+import TablePagination from "@/components/DataTable/TablePagination.vue";
 </script>
 
 <template>

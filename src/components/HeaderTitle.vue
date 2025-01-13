@@ -1,13 +1,22 @@
 <script setup lang="ts">
-defineProps<{
-  title: string;
-}>();
+import SvgIcon from "@/components/SvgIcon.vue";
+
+withDefaults(
+  defineProps<{
+    title: string;
+    iconName?: string;
+    iconColor?: string;
+  }>(),
+  {
+    iconColor: "black",
+  }
+);
 </script>
 
 <template>
   <div class="flex items-center">
     <h1 class="header__title">{{ title }}</h1>
-    <span>ikona</span>
+    <SvgIcon v-if="iconName" :name="iconName" :color="iconColor" />
   </div>
 </template>
 
@@ -18,6 +27,7 @@ defineProps<{
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -4%;
+    margin-right: 16px;
   }
 }
 </style>

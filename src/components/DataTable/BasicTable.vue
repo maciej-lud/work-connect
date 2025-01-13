@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import SvgIcon from "@/components/SvgIcon.vue";
+</script>
+
 <template>
   <table class="table">
     <thead class="table__head">
@@ -21,7 +25,7 @@
         <td class="table__td">Username placeholder</td>
         <td class="table__td">Polska</td>
         <td class="table__td">22.09.2024, 9:22</td>
-        <td class="table__td">...</td>
+        <td class="table__td"><SvgIcon name="dots" /></td>
       </tr>
     </tbody>
   </table>
