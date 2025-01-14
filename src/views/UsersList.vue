@@ -21,6 +21,16 @@ import DataTable from "@/components/DataTable/DataTable.vue";
         :textStyle="{ color: '#fff', fontWeight: 700 }"
       />
     </div>
-    <DataTable />
+    <DataTable
+      :headers="[
+        '',
+        'Imię i nazwisko',
+        'Adres email',
+        'Nazwa użytkownika',
+        'Kraj zamieszkania',
+        'Data rejestracji',
+        '',
+      ]"
+    />
   </ViewLayout>
 </template>

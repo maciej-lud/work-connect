@@ -1,18 +1,22 @@
 <script setup lang="ts">
+import type { PropType } from "vue";
 import SvgIcon from "@/components/SvgIcon.vue";
+
+defineProps({
+  headers: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
+});
 </script>
 
 <template>
   <table class="table">
     <thead class="table__head">
       <tr class="table__tr">
-        <th class="table__th"></th>
-        <th class="table__th">Imię i nazwisko</th>
-        <th class="table__th">Adres email</th>
-        <th class="table__th">Nazwa użytkownika</th>
-        <th class="table__th">Kraj zamieszkania</th>
-        <th class="table__th">Data rejestracji</th>
-        <th class="table__th"></th>
+        <th v-for="(header, idx) in headers" :key="idx" class="table__th">
+          {{ header }}
+        </th>
       </tr>
     </thead>
     <tbody>

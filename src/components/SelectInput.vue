@@ -2,7 +2,7 @@
 import type { PropType } from "vue";
 import SvgIcon from "@/components/SvgIcon.vue";
 
-const props = defineProps({
+defineProps({
   options: {
     type: Array as PropType<string[]>,
     default: () => [],
@@ -13,7 +13,7 @@ const props = defineProps({
 <template>
   <div class="input-wrapper">
     <select class="input-wrapper__select">
-      <option v-for="item in props.options" :key="item" :value="item">
+      <option v-for="item in options" :key="item" :value="item">
         {{ item }}
       </option>
     </select>

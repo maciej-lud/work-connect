@@ -4,7 +4,7 @@ import BaseButton from "@/components/BaseButton.vue";
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex items-center">
     <TextInput placeholder="Wyszukaj użytkownika..." iconName="magnifier" />
     <BaseButton
       text="Sortuj od: Imię i nazwisko"
