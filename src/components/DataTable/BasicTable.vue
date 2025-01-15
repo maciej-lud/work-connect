@@ -1,14 +1,22 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import type { PropType } from "vue";
 import SvgIcon from "@/components/SvgIcon.vue";
 
-export type TableDataType = {
-  [key: string]: any;
+type HeaderType = { title: string; name: string };
+type TableDataType = { [key: string]: any };
+type SortedColumnType = {
+  name: string;
+  direction: "asc" | "desc";
 };
+
+const emit = defineEmits<{
+  (e: "sortColumn", value: SortedColumnType): void;
+}>();
 
 defineProps({
   headers: {
-    type: Array as PropType<string[]>,
+    type: Array as PropType<HeaderType[]>,
     default: () => [],
   },
   data: {
@@ -16,15 +24,61 @@ defineProps({
     default: () => [],
   },
 });
+
+const sortedColumn = ref<SortedColumnType>({
+  name: "fullName",
+  direction: "asc",
+});
+
+function handleSortColumnChange(column: string) {
+  if (sortedColumn.value.name === column) {
+    sortedColumn.value.direction =
+      sortedColumn.value.direction === "asc" ? "desc" : "asc";
+  } else {
+    sortedColumn.value.name = column;
+    sortedColumn.value.direction = "asc";
+  }
+  emit("sortColumn", {
+    name: sortedColumn.value.name,
+    direction: sortedColumn.value.direction,
+  });
+}
 </script>
 
 <template>
   <table class="table">
     <thead class="table__head">
       <tr class="table__tr">
-        <th v-for="(header, idx) in headers" :key="idx" class="table__th">
-          {{ header }}
+        <th class="table__th"></th>
+        <th
+          v-for="header in headers"
+          :key="header.name"
+          class="table__th cursor-pointer"
+          @click="handleSortColumnChange(header.name)"
+        >
+          <div class="flex">
+            {{ header.title }}
+            <SvgIcon
+              v-if="
+                sortedColumn.name === header.name &&
+                sortedColumn.direction === 'asc'
+              "
+              name="sort-arrow-up"
+              color="#4d4d4d"
+              class="ml-2"
+            />
+            <SvgIcon
+              v-else-if="
+                sortedColumn.name === header.name &&
+                sortedColumn.direction === 'desc'
+              "
+              name="sort-arrow-down"
+              color="#4d4d4d"
+              class="ml-2"
+            />
+          </div>
         </th>
+        <th class="table__th"></th>
       </tr>
     </thead>
     <tbody>

@@ -64,13 +64,11 @@ onMounted(async () => {
     <DataTable
       v-if="!isLoading"
       :headers="[
-        '',
-        'Imię i nazwisko',
-        'Adres email',
-        'Nazwa użytkownika',
-        'Kraj zamieszkania',
-        'Data rejestracji',
-        '',
+        { title: 'Imię i nazwisko', name: 'fullName' },
+        { title: 'Adres email', name: 'email' },
+        { title: 'Nazwa użytkownika', name: 'username' },
+        { title: 'Kraj zamieszkania', name: 'country' },
+        { title: 'Data rejestracji', name: 'registrationDate' },
       ]"
       :data="users"
     />
