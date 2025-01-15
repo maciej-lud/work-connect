@@ -2,9 +2,17 @@
 import type { PropType } from "vue";
 import SvgIcon from "@/components/SvgIcon.vue";
 
+export type TableDataType = {
+  [key: string]: any;
+};
+
 defineProps({
   headers: {
     type: Array as PropType<string[]>,
+    default: () => [],
+  },
+  data: {
+    type: Array as PropType<TableDataType[]>,
     default: () => [],
   },
 });
@@ -20,15 +28,29 @@ defineProps({
       </tr>
     </thead>
     <tbody>
-      <tr class="table__tr">
-        <td class="table__td text-center">
-          <input class="table__checkbox" type="checkbox" />
+      <tr v-for="item in data" :key="item.id" class="table__tr">
+        <td class="table__td">
+          <div class="flex justify-center items-center">
+            <input class="table__checkbox" type="checkbox" />
+          </div>
         </td>
-        <td class="table__td">Patryk Polak</td>
-        <td class="table__td">testmail@gmail.com</td>
-        <td class="table__td">Username placeholder</td>
-        <td class="table__td">Polska</td>
-        <td class="table__td">22.09.2024, 9:22</td>
+        <td class="table__td">
+          <div class="flex items-center">
+            <img :src="item.picture" class="table__img" /> {{ item.fullName }}
+          </div>
+        </td>
+        <td class="table__td">{{ item.email }}</td>
+        <td class="table__td">{{ item.username }}</td>
+        <td class="table__td">
+          <div class="flex items-center">
+            <img
+              :src="`https://flagsapi.com/${item.country}/flat/64.png`"
+              class="h-4 mr-2"
+            />
+            {{ item.country }}
+          </div>
+        </td>
+        <td class="table__td">{{ item.registrationDate }}</td>
         <td class="table__td text-center">
           <SvgIcon name="dots" class="inline-block" />
         </td>
@@ -63,6 +85,12 @@ defineProps({
   &__td {
     font-size: 16px;
     color: #3d3d3d;
+  }
+  &__img {
+    width: 24px;
+    height: 24px;
+    border-radius: 48px;
+    margin-right: 8px;
   }
   &__checkbox {
     width: 18px;

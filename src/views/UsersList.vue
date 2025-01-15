@@ -1,8 +1,42 @@
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
 import ViewLayout from "@/layouts/ViewLayout.vue";
 import HeaderTitle from "@/components/HeaderTitle.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import DataTable from "@/components/DataTable/DataTable.vue";
+
+type User = {
+  id: string;
+  fullName: string;
+  picture: string;
+  email: string;
+  username: string;
+  country: string;
+  registrationDate: string;
+};
+
+const users = ref<User[]>([]);
+const isLoading = ref<boolean>(true);
+
+onMounted(async () => {
+  try {
+    const response = await fetch(
+      "https://randomuser.me/api/?results=1005&inc=picture,name,email,login,nat,registered"
+    );
+    const data = await response.json();
+    users.value = data.results.map((user: any) => ({
+      id: user.login.uuid,
+      fullName: `${user.name.first} ${user.name.last}`,
+      picture: user.picture.thumbnail,
+      email: user.email,
+      username: user.login.username,
+      country: user.nat,
+      registrationDate: new Date(user.registered.date).toLocaleString(),
+    }));
+  } finally {
+    isLoading.value = false;
+  }
+});
 </script>
 
 <template>
@@ -22,6 +56,7 @@ import DataTable from "@/components/DataTable/DataTable.vue";
       />
     </div>
     <DataTable
+      v-if="!isLoading"
       :headers="[
         '',
         'Imię i nazwisko',
@@ -31,6 +66,8 @@ import DataTable from "@/components/DataTable/DataTable.vue";
         'Data rejestracji',
         '',
       ]"
+      :data="users"
     />
+    <div v-else>Ładowanie danych...</div>
   </ViewLayout>
 </template>
