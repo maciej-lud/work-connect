@@ -20,33 +20,40 @@ const props = defineProps({
   },
 });
 
+const searchValue = ref<string>("");
 const itemsPerPage = ref<number>(10);
 const currentPage = ref<number>(1);
+
+const filteredData = computed(() => {
+  return props.data.filter((item) =>
+    item.fullName.toLowerCase().includes(searchValue.value.toLowerCase())
+  );
+});
 
 const paginatedData = computed(() => {
   const startIndex = (currentPage.value - 1) * itemsPerPage.value;
   const endIndex = startIndex + itemsPerPage.value;
-  return props.data.slice(startIndex, endIndex);
+  return filteredData.value.slice(startIndex, endIndex);
 });
 
-const handleItemsPerPage = (newItemsPerPage: number) => {
+const handleSearchValueChange = (value: string) => (searchValue.value = value);
+
+const handleItemsPerPageChange = (newItemsPerPage: number) => {
   itemsPerPage.value = newItemsPerPage;
   currentPage.value = 1;
 };
 
-const handlePageChange = (newPage: number) => {
-  currentPage.value = newPage;
-};
+const handlePageChange = (newPage: number) => (currentPage.value = newPage);
 </script>
 
 <template>
-  <TableFilters />
-  <BasicTable :headers="headers" :data="paginatedData" />
+  <TableFilters @searchValue="handleSearchValueChange" />
+  <BasicTable :headers="props.headers" :data="paginatedData" />
   <TablePagination
-    :dataLength="props.data.length"
+    :dataLength="filteredData.length"
     :itemsPerPage="itemsPerPage"
     :currentPage="currentPage"
-    @itemsPerPage="handleItemsPerPage"
+    @itemsPerPage="handleItemsPerPageChange"
     @pageChange="handlePageChange"
   />
 </template>

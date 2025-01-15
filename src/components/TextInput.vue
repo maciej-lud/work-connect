@@ -1,17 +1,40 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import SvgIcon from "@/components/SvgIcon.vue";
 
-defineProps<{
+const props = defineProps<{
   placeholder?: string;
   iconName?: string;
   iconColor?: string;
 }>();
+
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string): void;
+}>();
+
+const inputValue = ref<string>("");
+
+const handleInputChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  inputValue.value = target.value;
+  emit("update:modelValue", inputValue.value);
+};
 </script>
 
 <template>
   <div class="input-wrapper">
-    <SvgIcon v-if="iconName" :name="iconName" :color="iconColor" class="mr-2" />
-    <input class="input-wrapper__input" :placeholder="placeholder" />
+    <SvgIcon
+      v-if="props.iconName"
+      :name="props.iconName"
+      :color="props.iconColor"
+      class="mr-2"
+    />
+    <input
+      :value="inputValue"
+      :placeholder="props.placeholder"
+      class="input-wrapper__input"
+      @input="handleInputChange"
+    />
   </div>
 </template>
 

@@ -5,7 +5,7 @@ import HeaderTitle from "@/components/HeaderTitle.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import DataTable from "@/components/DataTable/DataTable.vue";
 
-type User = {
+type UserType = {
   id: string;
   fullName: string;
   picture: string;
@@ -15,7 +15,7 @@ type User = {
   registrationDate: string;
 };
 
-const users = ref<User[]>([]);
+const users = ref<UserType[]>([]);
 const isLoading = ref<boolean>(true);
 
 onMounted(async () => {
@@ -24,15 +24,21 @@ onMounted(async () => {
       "https://randomuser.me/api/?results=1005&inc=picture,name,email,login,nat,registered"
     );
     const data = await response.json();
-    users.value = data.results.map((user: any) => ({
-      id: user.login.uuid,
-      fullName: `${user.name.first} ${user.name.last}`,
-      picture: user.picture.thumbnail,
-      email: user.email,
-      username: user.login.username,
-      country: user.nat,
-      registrationDate: new Date(user.registered.date).toLocaleString(),
-    }));
+    users.value = data.results
+      .map(
+        (user: any): UserType => ({
+          id: user.login.uuid,
+          fullName: `${user.name.first} ${user.name.last}`,
+          picture: user.picture.thumbnail,
+          email: user.email,
+          username: user.login.username,
+          country: user.nat,
+          registrationDate: new Date(user.registered.date)
+            .toLocaleString()
+            .split(",")[0],
+        })
+      )
+      .sort((a: UserType, b: UserType) => a.fullName.localeCompare(b.fullName));
   } finally {
     isLoading.value = false;
   }

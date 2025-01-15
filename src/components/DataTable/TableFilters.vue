@@ -1,11 +1,24 @@
 <script setup lang="ts">
+import { ref, watch } from "vue";
 import TextInput from "@/components/TextInput.vue";
 import BaseButton from "@/components/BaseButton.vue";
+
+const emit = defineEmits<{
+  (e: "searchValue", value: string): void;
+}>();
+
+const searchValue = ref<string>("");
+
+watch(searchValue, (value) => emit("searchValue", value));
 </script>
 
 <template>
   <div class="flex items-center">
-    <TextInput placeholder="Wyszukaj użytkownika..." iconName="magnifier" />
+    <TextInput
+      v-model="searchValue"
+      placeholder="Wyszukaj użytkownika..."
+      iconName="magnifier"
+    />
     <BaseButton
       text="Sortuj od: Imię i nazwisko"
       iconName="sort-arrows"
