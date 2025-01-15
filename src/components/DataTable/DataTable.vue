@@ -40,7 +40,7 @@ const filteredData = computed(() => {
 });
 
 const sortedData = computed(() => {
-  const sorted = [...props.data].sort((a, b) => {
+  const sorted = [...filteredData.value].sort((a, b) => {
     const valueA = a[sortedColumn.value.name];
     const valueB = b[sortedColumn.value.name];
     if (valueA < valueB) {
